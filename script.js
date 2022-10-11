@@ -1,4 +1,4 @@
-let scrolls = 1;
+let scrolls = 10;
 let delay = 500; 
 let output = "";
 
