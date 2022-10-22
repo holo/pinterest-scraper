@@ -1,19 +1,27 @@
-let scrolls = 10;
+let scrolls = 1;
 let delay = 500; 
 let output = "";
 
 function scrape() {
-	let images = document.querySelectorAll('[data-test-id="non-story-pin-image"]');
-	for (image of images) {
-		let img = image.children[0].children[0]
-		let link = img.src.replace("236x", "originals")+"\n"
-
-		if (output.includes(link) || !img.alt.includes("contains")) {
-			console.log(`skipped ${link}`)
-			continue
-		}
-		output += link;
+	let elements = document.querySelectorAll('[data-test-id="pinWrapper"]');
+	for (element of elements) {
+		get_links(element);
 	}
+}
+
+function get_links(element) {
+	let img = element.querySelectorAll('[data-test-id="non-story-pin-image"]');
+	if (img.length < 1)
+		return;
+
+	let link = img[0].getElementsByTagName("img")[0].src.replace("236x", "originals")+"\n";
+
+	for (span of element.getElementsByTagName("span")) {
+		if (span.innerHTML == "Promoted by")
+			return;
+	}
+
+	output += link;
 }
 
 let interval = setInterval(function() {
@@ -23,7 +31,7 @@ let interval = setInterval(function() {
 	scrape();
 
 	if (scrolls == 0) {
-		clearInterval(interval)
-		console.log(output)
+		clearInterval(interval);
+		console.log(output);
 	}
 }, delay)
