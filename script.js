@@ -1,24 +1,28 @@
-let scrolls = 1;
-let delay = 500; 
+let scrolls = 10;
+let delay = 1000; 
 let output = "";
 
 function scrape() {
 	let elements = document.querySelectorAll('[data-test-id="pinWrapper"]');
 	for (element of elements) {
-		get_links(element);
+		get_links(element)
 	}
 }
 
 function get_links(element) {
-	let img = element.querySelectorAll('[data-test-id="non-story-pin-image"]');
+	let img = element.querySelectorAll('[data-test-id="non-story-pin-image"]')
 	if (img.length < 1)
 		return;
 
-	let link = img[0].getElementsByTagName("img")[0].src.replace("236x", "originals")+"\n";
+	let link = img[0].getElementsByTagName("img")[0].src.replace("236x", "736x")+"\n";
 
 	for (span of element.getElementsByTagName("span")) {
 		if (span.innerHTML == "Promoted by")
 			return;
+	}
+
+	if (output.includes(link)) {
+		return;
 	}
 
 	output += link;
