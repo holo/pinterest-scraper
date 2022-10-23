@@ -7,3 +7,5 @@ Scrapes all images from a page on pinterest.
 > Change [scrolls](https://github.com/holo/pinterest-scraper/blob/main/script.js#L1) to how many pages you want to scroll.
 
 #### Paste the js into your console while on the page you would like to scrape.
+
+ * Downloader can be found [here](https://github.com/holo/image-link-downloader/)
